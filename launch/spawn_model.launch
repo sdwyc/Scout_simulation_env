@@ -1,0 +1,13 @@
+<launch>
+    <arg name="x_pos" default="0.0"/>
+    <arg name="y_pos" default="0.0"/>
+    <arg name="z_pos" default="10.0"/>
+    <!-- open model -->
+    <param name="robot_description" command="$(find xacro)/xacro --inorder $(find scout_simulator)/urdf/scout/scout_v2.xacro" />
+    
+    <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-urdf -model scout2 -x $(arg x_pos) -y $(arg y_pos) -z $(arg z_pos) -param robot_description" />
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" >
+        <param name="publish_frequency" value="50"/>
+    </node>
+
+</launch>
